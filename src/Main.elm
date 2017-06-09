@@ -15,8 +15,8 @@ type alias Author =
 
 
 type Event
-    = Event { date : Date, title : String, comment : String }
-    | Talk { date : Date, title : String, description : String, author : Author }
+    = Event { start : Date, end : Date, title : String, comment : String }
+    | Talk { start : Date, end : Date, title : String, description : String, author : Author }
 
 
 type alias Events =
