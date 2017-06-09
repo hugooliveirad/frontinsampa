@@ -5,24 +5,29 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
-viewTalk =
-    li [ class "pv1" ]
-        [ time [] [ text "9:30" ]
-        , h4 [ class "f3 ma0 normal" ] [ text "Keynote" ]
-        , div [ class "flex items-center" ]
-            [ div [ class "pr1" ]
-                [ img [ class "w1 h1 br-100 bn bg-light-silver" ] []
-                ]
-            , span [ class "lh-solid" ] [ text "Matheus Marsiglio" ]
+viewEvent =
+    li [ class "pb3 flex" ]
+        [ div [ class "w2 h2 mr2 br-100 bn bg-light-silver" ] []
+        , div []
+            [ time [] [ text "9:30" ]
+            , h4 [ class "f4 ma0 normal" ] [ text "Cadastro" ]
+            , span [ class "" ] [ text "Não esqueça seu RG" ]
             ]
         ]
 
 
-viewEvent =
-    li [ class "pv1" ]
-        [ time [] [ text "9:30" ]
-        , h4 [ class "f4 ma0 normal" ] [ text "Cadastro" ]
-        , span [ class "" ] [ text "Não esqueça seu RG" ]
+viewTalk =
+    li [ class "pb3 flex" ]
+        [ div [] [ img [ class "w2 h2 mr2 br-100 bn bg-light-silver" ] [] ]
+        , div []
+            [ time [] [ text "9:30 ~ 10:00" ]
+            , h4 [ class "f4 ma0 normal" ] [ text "Keynote" ]
+            , div [ class "flex items-center" ]
+                [ span
+                    [ class "lh-solid" ]
+                    [ text "Matheus Marsiglio" ]
+                ]
+            ]
         ]
 
 
