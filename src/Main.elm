@@ -34,11 +34,11 @@ viewTalk =
 main =
     div []
         [ header [ class "pa3 pt4" ]
-            [ h1 [ class "headline ma0" ] [ text "Frontinsampa" ] ]
+            [ h1 [ class "f2 ma0" ] [ text "Frontinsampa" ] ]
         , section [ class "pa3" ]
-            [ h2 [ class "subheadline" ] [ text "Informações" ] ]
+            [ h2 [ class "f3 ma0 mb3" ] [ text "Informações" ] ]
         , section [ class "pa3" ]
-            [ h2 [ class "subheadline" ] [ text "Agenda" ]
+            [ h2 [ class "f3 ma0 mb3" ] [ text "Agenda" ]
             , ul [ class "list pa0 ma0" ]
                 [ viewEvent
                 , viewTalk
