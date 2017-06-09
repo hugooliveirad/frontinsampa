@@ -7,26 +7,23 @@ import Html.Events exposing (..)
 
 viewEvent =
     li [ class "pb3 flex" ]
-        [ div [ class "w2 h2 mr2 br-100 bn bg-light-silver" ] []
+        [ div [ class "w2 h2 mr2 br-100 bn bg-blue" ] []
         , div []
             [ time [] [ text "9:30" ]
-            , h4 [ class "f4 ma0 normal" ] [ text "Cadastro" ]
-            , span [ class "" ] [ text "Não esqueça seu RG" ]
+            , h4 [ class "f4 ma0 mb1" ] [ text "Cadastro" ]
+            , span [] [ text "Não esqueça seu RG" ]
             ]
         ]
 
 
 viewTalk =
     li [ class "pb3 flex" ]
-        [ div [] [ img [ class "w2 h2 mr2 br-100 bn bg-light-silver" ] [] ]
+        [ div [] [ img [ class "w2 h2 mr2 br-100 bn bg-green" ] [] ]
         , div []
             [ time [] [ text "9:30 ~ 10:00" ]
-            , h4 [ class "f4 ma0 normal" ] [ text "Keynote" ]
+            , h4 [ class "f4 ma0 mb1" ] [ text "Keynote" ]
             , div [ class "flex items-center" ]
-                [ span
-                    [ class "lh-solid" ]
-                    [ text "Matheus Marsiglio" ]
-                ]
+                [ span [] [ text "Matheus Marsiglio" ] ]
             ]
         ]
 
