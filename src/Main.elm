@@ -18,6 +18,18 @@ type Event
     | Talk { date : Date, title : String, description : String, author : Author }
 
 
+type alias Events =
+    List Event
+
+
+type alias Model =
+    { schedule : Events }
+
+
+initModel =
+    { schedule = [] }
+
+
 viewEvent =
     li [ class "pb3 flex" ]
         [ div [ class "w2 h2 mr2 br-100 bn bg-blue" ] []
