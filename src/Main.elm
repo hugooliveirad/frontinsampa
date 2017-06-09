@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Date exposing (Date)
+import Date.Extra as Date
 
 
 type alias Author =
@@ -24,6 +25,21 @@ type alias Events =
 
 type alias Model =
     { schedule : Events }
+
+
+eventTz : Date.TimeZone
+eventTz =
+    Date.offset -3
+
+
+eventDate : Date.DateSpec
+eventDate =
+    Date.calendarDate 2017 Date.Jul 1
+
+
+eventTime : Int -> Int -> Date
+eventTime hour minute =
+    Date.fromSpec eventTz (Date.atTime hour minute 0 0) eventDate
 
 
 initModel =
