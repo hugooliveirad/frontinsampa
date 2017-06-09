@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
     "summary": "Ship more Elm with this boilerplate",
-    "repository": "",
+    "repository": "https://github.com/hugobessaa/frontinsampa.git",
     "license": "MIT",
     "source-directories": [
         "src"
