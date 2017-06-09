@@ -3,6 +3,19 @@ module Main exposing (main)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Date exposing (Date)
+
+
+type alias Author =
+    { name : String
+    , avatarUrl : String
+    , twitterHandle : String
+    }
+
+
+type Event
+    = Event { date : Date, title : String, comment : String }
+    | Talk { date : Date, title : String, description : String, author : Author }
 
 
 viewEvent =
