@@ -1,0 +1,13 @@
+{
+  "name": "frontinsampa",
+  "version": "1.0.0",
+  "author": "Hugo Bessa <eu@hugobessa.com.br>",
+  "license": "AGPL v3.0",
+  "scripts": {
+    "start": "elm-live src/Main.elm --output dist/main.js --open --host=0.0.0.0"
+  },
+  "dependencies": {
+    "elm": "^0.18.0",
+    "elm-live": "^2.7.4"
+  }
+}
