@@ -136,7 +136,7 @@ type alias Model =
 
 eventTz : Date.TimeZone
 eventTz =
-    Date.offset -300
+    Date.offset -180
 
 
 eventDate : Date.DateSpec
@@ -279,7 +279,7 @@ viewEvent event =
 
 toHourAndMinute : Date -> String
 toHourAndMinute date =
-    Date.toFormattedString "h:mm" date
+    Date.toFormattedString "H:mm" date
 
 
 formatEventTime : Date -> Maybe Date -> String
