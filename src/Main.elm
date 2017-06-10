@@ -1,4 +1,4 @@
-module Main exposing (main)
+module Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -325,7 +325,7 @@ viewTalk talk =
             talk.author.name
     in
         li [ class "pb4 flex" ]
-            [ div []
+            [ div [ class "bl bw2 b--blue pl2" ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 ma0 mb1" ] [ text title ]
                 , div [] [ text authorName ]
