@@ -267,7 +267,7 @@ viewEvent event =
         comment =
             Maybe.withDefault "" event.comment
     in
-        li [ class "pb3 flex" ]
+        li [ class "pb4 flex" ]
             [ div []
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 ma0 mb1" ] [ text title ]
@@ -311,7 +311,7 @@ viewTalk talk =
         authorName =
             talk.author.name
     in
-        li [ class "pb3 flex" ]
+        li [ class "pb4 flex" ]
             [ div []
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 ma0 mb1" ] [ text title ]
