@@ -3,8 +3,16 @@ module Main exposing (main)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Date exposing (Date)
+import Date exposing (Date, hour, minute)
 import Date.Extra as Date
+
+
+stringHour =
+    hour >> toString
+
+
+stringMinute =
+    minute >> toString
 
 
 type alias Author =
@@ -128,7 +136,7 @@ type alias Model =
 
 eventTz : Date.TimeZone
 eventTz =
-    Date.offset -3
+    Date.offset -300
 
 
 eventDate : Date.DateSpec
@@ -251,7 +259,7 @@ initModel =
 viewEvent event =
     let
         startEnd =
-            toString event.start
+            formatEventTime event.start event.end
 
         title =
             event.title
@@ -269,16 +277,37 @@ viewEvent event =
             ]
 
 
+toHourAndMinute : Date -> String
+toHourAndMinute date =
+    Date.toFormattedString "h:mm" date
+
+
+formatEventTime : Date -> Maybe Date -> String
+formatEventTime start end =
+    case end of
+        Just e ->
+            toHourAndMinute start
+                ++ " ~ "
+                ++ Date.toFormattedString "h.mm" e
+
+        Nothing ->
+            toHourAndMinute start
+
+
+formatTalkTime : Date -> Date -> String
+formatTalkTime start end =
+    toHourAndMinute start
+        ++ " ~ "
+        ++ toHourAndMinute end
+
+
 viewTalk talk =
     let
         startEnd =
-            toString talk.start
+            formatTalkTime talk.start talk.end
 
         title =
             talk.title
-
-        description =
-            talk.description
 
         authorName =
             talk.author.name
@@ -289,7 +318,6 @@ viewTalk talk =
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 ma0 mb1" ] [ text title ]
                 , div [] [ text authorName ]
-                , div [] [ text description ]
                 ]
             ]
 
