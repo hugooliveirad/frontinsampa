@@ -248,27 +248,64 @@ initModel =
     }
 
 
-viewEvent =
-    li [ class "pb3 flex" ]
-        [ div [ class "w2 h2 mr2 br-100 bn bg-blue" ] []
-        , div []
-            [ time [] [ text "9:30" ]
-            , h4 [ class "f4 ma0 mb1" ] [ text "Cadastro" ]
-            , span [] [ text "Não esqueça seu RG" ]
+viewEvent event =
+    let
+        startEnd =
+            toString event.start
+
+        title =
+            event.title
+
+        comment =
+            Maybe.withDefault "" event.comment
+    in
+        li [ class "pb3 flex" ]
+            [ div [ class "w2 h2 flex-no-shrink mr2 br-100 bn bg-blue" ] []
+            , div []
+                [ time [] [ text startEnd ]
+                , h4 [ class "f4 ma0 mb1" ] [ text title ]
+                , div [] [ text comment ]
+                ]
             ]
-        ]
 
 
-viewTalk =
-    li [ class "pb3 flex" ]
-        [ div [] [ img [ class "w2 h2 mr2 br-100 bn bg-green" ] [] ]
-        , div []
-            [ time [] [ text "9:30 ~ 10:00" ]
-            , h4 [ class "f4 ma0 mb1" ] [ text "Keynote" ]
-            , div [ class "flex items-center" ]
-                [ span [] [ text "Matheus Marsiglio" ] ]
+viewTalk talk =
+    let
+        startEnd =
+            toString talk.start
+
+        title =
+            talk.title
+
+        description =
+            talk.description
+
+        authorName =
+            talk.author.name
+    in
+        li [ class "pb3 flex" ]
+            [ img [ class "w2 h2 flex-no-shrink mr2 br-100 bn bg-green" ] []
+            , div []
+                [ time [] [ text startEnd ]
+                , h4 [ class "f4 ma0 mb1" ] [ text title ]
+                , div [] [ text authorName ]
+                , div [] [ text description ]
+                ]
             ]
-        ]
+
+
+viewSchedule schedule =
+    ul [ class "list pa0 ma0" ] <|
+        List.map
+            (\event ->
+                case event of
+                    Event e ->
+                        viewEvent e
+
+                    Talk t ->
+                        viewTalk t
+            )
+            schedule
 
 
 main =
@@ -279,10 +316,7 @@ main =
             [ h2 [ class "f3 ma0 mb3" ] [ text "Informações" ] ]
         , section [ class "pa3" ]
             [ h2 [ class "f3 ma0 mb3" ] [ text "Agenda" ]
-            , ul [ class "list pa0 ma0" ]
-                [ viewEvent
-                , viewTalk
-                ]
+            , viewSchedule initModel.schedule
             ]
         , footer [] []
         ]
