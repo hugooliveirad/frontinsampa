@@ -103,8 +103,19 @@ matheusMarsiglio =
 
 
 type Event
-    = Event { start : Date, end : Date, title : String, comment : String }
-    | Talk { start : Date, end : Date, title : String, description : String, author : Author }
+    = Event
+        { start : Date
+        , end : Maybe Date
+        , title : String
+        , comment : Maybe String
+        }
+    | Talk
+        { start : Date
+        , end : Date
+        , title : String
+        , description : String
+        , author : Author
+        }
 
 
 type alias Events =
@@ -134,9 +145,9 @@ initModel =
     { schedule =
         [ Event
             { start = (eventTime 8 0)
-            , end = (eventTime 9 20)
+            , end = Just (eventTime 9 20)
             , title = "Credenciamento"
-            , comment = "Não Esqueça seu RG"
+            , comment = Just "Não Esqueça seu RG"
             }
         , Talk
             { start = (eventTime 9 20)
@@ -175,9 +186,9 @@ initModel =
             }
         , Event
             { start = (eventTime 12 30)
-            , end = (eventTime 14 0)
+            , end = Just (eventTime 14 0)
             , title = "Almoço"
-            , comment = ""
+            , comment = Nothing
             }
         , Talk
             { start = (eventTime 14 10)
@@ -209,9 +220,9 @@ initModel =
             }
         , Event
             { start = (eventTime 17 0)
-            , end = (eventTime 17 30)
+            , end = Just (eventTime 17 30)
             , title = "Coffee Break"
-            , comment = ""
+            , comment = Nothing
             }
         , Talk
             { start = (eventTime 17 30)
@@ -229,9 +240,9 @@ initModel =
             }
         , Event
             { start = (eventTime 19 0)
-            , end = (eventTime 19 0)
+            , end = Nothing
             , title = "Party - Code In The Dark"
-            , comment = ""
+            , comment = Nothing
             }
         ]
     }
