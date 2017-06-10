@@ -7,12 +7,60 @@ import Date exposing (Date, hour, minute)
 import Date.Extra as Date
 
 
+-- Date Helpers
+
+
+stringHour : Date -> String
 stringHour =
     hour >> toString
 
 
+stringMinute : Date -> String
 stringMinute =
     minute >> toString
+
+
+eventTz : Date.TimeZone
+eventTz =
+    Date.offset -180
+
+
+eventDate : Date.DateSpec
+eventDate =
+    Date.calendarDate 2017 Date.Jul 1
+
+
+eventTime : Int -> Int -> Date
+eventTime hour minute =
+    Date.fromSpec eventTz (Date.atTime hour minute 0 0) eventDate
+
+
+toHourAndMinute : Date -> String
+toHourAndMinute date =
+    Date.toFormattedString "H:mm" date
+
+
+formatEventTime : Date -> Maybe Date -> String
+formatEventTime start end =
+    case end of
+        Just e ->
+            toHourAndMinute start
+                ++ " ~ "
+                ++ toHourAndMinute e
+
+        Nothing ->
+            toHourAndMinute start
+
+
+formatTalkTime : Date -> Date -> String
+formatTalkTime start end =
+    toHourAndMinute start
+        ++ " ~ "
+        ++ toHourAndMinute end
+
+
+
+-- MODEL
 
 
 type alias Author =
@@ -134,21 +182,6 @@ type alias Model =
     { schedule : Events }
 
 
-eventTz : Date.TimeZone
-eventTz =
-    Date.offset -180
-
-
-eventDate : Date.DateSpec
-eventDate =
-    Date.calendarDate 2017 Date.Jul 1
-
-
-eventTime : Int -> Int -> Date
-eventTime hour minute =
-    Date.fromSpec eventTz (Date.atTime hour minute 0 0) eventDate
-
-
 initModel =
     { schedule =
         [ Event
@@ -256,6 +289,10 @@ initModel =
     }
 
 
+
+-- VIEW
+
+
 viewEvent event =
     let
         startEnd =
@@ -267,37 +304,13 @@ viewEvent event =
         comment =
             Maybe.withDefault "" event.comment
     in
-        li [ class "pb4 flex" ]
-            [ div []
+        li [ class "pb4 flex mid-gray" ]
+            [ div [ class "bl bw2 b--silver pl2" ]
                 [ time [] [ text startEnd ]
-                , h4 [ class "f4 ma0 mb1" ] [ text title ]
+                , h4 [ class "f4 ma0 mb1 normal" ] [ text title ]
                 , div [] [ text comment ]
                 ]
             ]
-
-
-toHourAndMinute : Date -> String
-toHourAndMinute date =
-    Date.toFormattedString "H:mm" date
-
-
-formatEventTime : Date -> Maybe Date -> String
-formatEventTime start end =
-    case end of
-        Just e ->
-            toHourAndMinute start
-                ++ " ~ "
-                ++ toHourAndMinute e
-
-        Nothing ->
-            toHourAndMinute start
-
-
-formatTalkTime : Date -> Date -> String
-formatTalkTime start end =
-    toHourAndMinute start
-        ++ " ~ "
-        ++ toHourAndMinute end
 
 
 viewTalk talk =
