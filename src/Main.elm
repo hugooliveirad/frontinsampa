@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import DateHelpers exposing (..)
 import Events exposing (..)
+import Navigation as Navigation exposing (Location)
 
 
 -- MODEL
@@ -77,7 +78,7 @@ viewSchedule schedule =
             schedule
 
 
-main =
+view model =
     div []
         [ header [ class "pa3 pt4" ]
             [ h1 [ class "f2 ma0" ] [ text "Frontinsampa" ] ]
@@ -89,3 +90,40 @@ main =
             ]
         , footer [] []
         ]
+
+
+
+-- UPDATE
+
+
+type Msg
+    = Navigate Location
+
+
+update msg model =
+    ( model, Cmd.none )
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions model =
+    Sub.none
+
+
+
+-- PROGRAM
+
+
+init location =
+    ( initModel, Cmd.none )
+
+
+main =
+    Navigation.program Navigate
+        { init = init
+        , update = update
+        , view = view
+        , subscriptions = subscriptions
+        }
