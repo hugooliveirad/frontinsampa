@@ -333,6 +333,7 @@ viewTalk talk =
             ]
 
 
+viewSchedule : Events -> Html msg
 viewSchedule schedule =
     ul [ class "list pa0 ma0" ] <|
         List.map
