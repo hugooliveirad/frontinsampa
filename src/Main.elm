@@ -287,7 +287,7 @@ formatEventTime start end =
         Just e ->
             toHourAndMinute start
                 ++ " ~ "
-                ++ Date.toFormattedString "h.mm" e
+                ++ toHourAndMinute e
 
         Nothing ->
             toHourAndMinute start
