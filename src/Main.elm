@@ -34,8 +34,8 @@ viewEvent event =
         comment =
             Maybe.withDefault "" event.comment
     in
-        li [ class "pb4 flex mid-gray" ]
-            [ div [ class "bl bw2 b--silver pl2" ]
+        li [ class "pb3 flex" ]
+            [ div [ class "w-100 br2 bg-light-gray mid-gray pv3 ph3" ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv1 normal" ] [ text title ]
                 , div [] [ text comment ]
@@ -54,8 +54,8 @@ viewTalk talk =
         authorName =
             talk.author.name
     in
-        li [ class "pb4 flex" ]
-            [ div [ class "bl bw2 b--blue pl2" ]
+        li [ class "pb3 flex" ]
+            [ div [ class "w-100 br2 shadow-4 bg-blue white pv3 ph3" ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv1" ] [ text title ]
                 , div [] [ text authorName ]
@@ -83,9 +83,9 @@ view model =
         [ header [ class "pa3 pt4" ]
             [ h1 [ class "f2 ma0" ] [ text "Frontinsampa" ] ]
         , section [ class "pa3" ]
-            [ h2 [ class "f2 ma0 mb3" ] [ text "Informações" ] ]
+            [ h2 [ class "f2 ma0 mb4" ] [ text "Informações" ] ]
         , section [ class "pa3" ]
-            [ h2 [ class "f2 ma0 mb3" ] [ text "Agenda" ]
+            [ h2 [ class "f2 ma0 mb4" ] [ text "Agenda" ]
             , viewSchedule initModel.schedule
             ]
         , footer [] []
