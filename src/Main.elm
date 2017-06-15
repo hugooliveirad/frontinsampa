@@ -44,7 +44,7 @@ viewEvent event =
             ]
 
 
-viewTalk talk selected =
+viewTalk talk event selected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
@@ -67,17 +67,18 @@ viewTalk talk selected =
         kindClass =
             kindToClass talk.kind
     in
-        li [ class "pb3 flex pointer grow" ]
+        li [ class "pb3 flex pointer grow", onClick <| SelectEvent event ]
             [ div [ class "w-100 br2 shadow-4 pv3 ph3", class kindClass ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv2 normal" ] [ text title ]
                 , div [ class descriptionClass ] [ text description ]
+                , div [] [ text <| toString selected ]
                 , div [] [ text authorName ]
                 ]
             ]
 
 
-viewSchedule : Events -> Html msg
+viewSchedule : Events -> Html Msg
 viewSchedule schedule =
     ul [ class "list pa0 ma0" ] <|
         MaybeZipper.mapToList
@@ -87,7 +88,7 @@ viewSchedule schedule =
                         viewEvent e
 
                     Talk t ->
-                        viewTalk t selected
+                        viewTalk t event selected
             )
             schedule
 
@@ -100,7 +101,7 @@ view model =
             [ h2 [ class "f2 ma0 mb4" ] [ text "Informações" ] ]
         , section [ class "pa3" ]
             [ h2 [ class "f2 ma0 mb4" ] [ text "Agenda" ]
-            , viewSchedule initModel.schedule
+            , viewSchedule model.schedule
             ]
         , footer [] []
         ]
@@ -112,10 +113,18 @@ view model =
 
 type Msg
     = Navigate Location
+    | SelectEvent Event
 
 
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        Navigate _ ->
+            ( model, Cmd.none )
+
+        SelectEvent event ->
+            ( { model | schedule = MaybeZipper.select event model.schedule }
+            , Cmd.none
+            )
 
 
 
