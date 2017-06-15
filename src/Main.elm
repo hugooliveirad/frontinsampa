@@ -53,11 +53,14 @@ viewTalk talk =
 
         authorName =
             talk.author.name
+
+        kindClass =
+            kindToClass talk.kind
     in
         li [ class "pb3 flex" ]
-            [ div [ class "w-100 br2 shadow-4 bg-blue white pv3 ph3" ]
+            [ div [ class "w-100 br2 shadow-4 pv3 ph3", class kindClass ]
                 [ time [] [ text startEnd ]
-                , h4 [ class "f4 mv1" ] [ text title ]
+                , h4 [ class "f4 mv2 normal" ] [ text title ]
                 , div [] [ text authorName ]
                 ]
             ]
