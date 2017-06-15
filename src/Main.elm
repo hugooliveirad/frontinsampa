@@ -25,7 +25,7 @@ initModel =
 -- VIEW
 
 
-viewEvent event =
+viewEvent event currentTime =
     let
         startEnd =
             formatEventTime event.start event.end
@@ -45,7 +45,7 @@ viewEvent event =
             ]
 
 
-viewTalk talk event selected anySelected =
+viewTalk talk event currentTime selected anySelected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
@@ -97,7 +97,8 @@ viewTalk talk event selected anySelected =
                 , opacityClass
                 , onClick selectMsg
                 ]
-                [ time [] [ text startEnd ]
+                [ span [ class "br2 pa1 bg-red white mr1" ] [ text "Agora" ]
+                , time [] [ text startEnd ]
                 , h4 [ class "f4 mv2" ] [ text title ]
                 , div [ class "lh-copy overflow-hidden transition-smooth", descriptionClass ] [ text description ]
                 , div [ class "flex items-center" ]
@@ -113,16 +114,19 @@ viewSchedule schedule =
     let
         anySelected =
             MaybeExtra.isJust <| MaybeZipper.get schedule
+
+        currentTime =
+            eventTime 10 10
     in
         ul [ class "list pa0 ma0" ] <|
             MaybeZipper.mapToList
                 (\event selected ->
                     case event of
                         Event e ->
-                            viewEvent e
+                            viewEvent e currentTime
 
                         Talk t ->
-                            viewTalk t event selected anySelected
+                            viewTalk t event currentTime selected anySelected
                 )
                 schedule
 
