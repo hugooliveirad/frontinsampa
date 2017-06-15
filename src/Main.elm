@@ -67,7 +67,7 @@ viewTalk talk selected =
         kindClass =
             kindToClass talk.kind
     in
-        li [ class "pb3 flex" ]
+        li [ class "pb3 flex pointer grow" ]
             [ div [ class "w-100 br2 shadow-4 pv3 ph3", class kindClass ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv2 normal" ] [ text title ]
