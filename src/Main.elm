@@ -3,6 +3,7 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Date.Extra exposing (isBetween)
 import DateHelpers exposing (..)
 import Events exposing (..)
 import Navigation as Navigation exposing (Location)
@@ -25,7 +26,7 @@ initModel =
 -- VIEW
 
 
-viewEvent event currentTime =
+viewEvent event =
     let
         startEnd =
             formatEventTime event.start event.end
@@ -45,10 +46,16 @@ viewEvent event currentTime =
             ]
 
 
-viewTalk talk event currentTime selected anySelected =
+viewTalk talk event now selected anySelected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
+
+        nowClass =
+            if now then
+                class ""
+            else
+                class "dn"
 
         title =
             talk.title
@@ -97,8 +104,8 @@ viewTalk talk event currentTime selected anySelected =
                 , opacityClass
                 , onClick selectMsg
                 ]
-                [ span [ class "br2 pa1 bg-red white mr1" ] [ text "Agora" ]
-                , time [] [ text startEnd ]
+                [ time [] [ text startEnd ]
+                , span [ class "br2 pa1 bg-red white ml2", nowClass ] [ text "Agora" ]
                 , h4 [ class "f4 mv2" ] [ text title ]
                 , div [ class "lh-copy overflow-hidden transition-smooth", descriptionClass ] [ text description ]
                 , div [ class "flex items-center" ]
@@ -123,10 +130,14 @@ viewSchedule schedule =
                 (\event selected ->
                     case event of
                         Event e ->
-                            viewEvent e currentTime
+                            viewEvent e
 
                         Talk t ->
-                            viewTalk t event currentTime selected anySelected
+                            let
+                                now =
+                                    isBetween t.start t.end currentTime
+                            in
+                                viewTalk t event now selected anySelected
                 )
                 schedule
 
