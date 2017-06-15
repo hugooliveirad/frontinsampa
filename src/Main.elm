@@ -6,6 +6,7 @@ import Html.Events exposing (..)
 import DateHelpers exposing (..)
 import Events exposing (..)
 import Navigation as Navigation exposing (Location)
+import MaybeZipper
 
 
 -- MODEL
@@ -43,7 +44,7 @@ viewEvent event =
             ]
 
 
-viewTalk talk =
+viewTalk talk selected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
@@ -54,6 +55,15 @@ viewTalk talk =
         authorName =
             talk.author.name
 
+        description =
+            talk.description
+
+        descriptionClass =
+            if selected then
+                ""
+            else
+                "dn"
+
         kindClass =
             kindToClass talk.kind
     in
@@ -61,6 +71,7 @@ viewTalk talk =
             [ div [ class "w-100 br2 shadow-4 pv3 ph3", class kindClass ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv2 normal" ] [ text title ]
+                , div [ class descriptionClass ] [ text description ]
                 , div [] [ text authorName ]
                 ]
             ]
@@ -69,14 +80,14 @@ viewTalk talk =
 viewSchedule : Events -> Html msg
 viewSchedule schedule =
     ul [ class "list pa0 ma0" ] <|
-        List.map
-            (\event ->
+        MaybeZipper.mapToList
+            (\event selected ->
                 case event of
                     Event e ->
                         viewEvent e
 
                     Talk t ->
-                        viewTalk t
+                        viewTalk t selected
             )
             schedule
 
