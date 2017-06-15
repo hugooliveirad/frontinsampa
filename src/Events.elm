@@ -55,7 +55,7 @@ schedule =
             { start = (eventTime 9 20)
             , end = (eventTime 9 30)
             , title = "Apresentação"
-            , description = ""
+            , description = "Início do evento."
             , author = matheusMarsiglio
             , kind = Other
             }
