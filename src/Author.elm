@@ -91,6 +91,6 @@ zenoRocha =
 matheusMarsiglio : Author
 matheusMarsiglio =
     { name = "Matheus Marsiglio"
-    , avatarUrl = ""
+    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/matheus-marsiglio-frontinsampa.jpg"
     , twitterHandle = "mtmr0x"
     }
