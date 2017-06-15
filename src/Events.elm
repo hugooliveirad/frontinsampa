@@ -49,7 +49,7 @@ schedule =
             { start = (eventTime 8 0)
             , end = Just (eventTime 9 20)
             , title = "Credenciamento"
-            , comment = Just "Não Esqueça seu RG"
+            , comment = Just "Não esqueça seu RG"
             }
         , Talk
             { start = (eventTime 9 20)
