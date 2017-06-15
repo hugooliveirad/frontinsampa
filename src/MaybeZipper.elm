@@ -88,3 +88,8 @@ find findFn zipper =
 select : a -> MaybeZipper a -> MaybeZipper a
 select item zipper =
     find ((==) item) zipper
+
+
+unselect : MaybeZipper a -> MaybeZipper a
+unselect zipper =
+    zipper |> toList |> fromList
