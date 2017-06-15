@@ -7,6 +7,7 @@ import DateHelpers exposing (..)
 import Events exposing (..)
 import Navigation as Navigation exposing (Location)
 import MaybeZipper
+import Maybe.Extra as MaybeExtra
 
 
 -- MODEL
@@ -44,7 +45,7 @@ viewEvent event =
             ]
 
 
-viewTalk talk event selected =
+viewTalk talk event selected anySelected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
@@ -70,14 +71,32 @@ viewTalk talk event selected =
         kindClass =
             class <| kindToClass talk.kind
 
+        opacityClass =
+            if anySelected && not selected then
+                class "o-60"
+            else
+                class "o-100"
+
         shadowClass =
             if selected then
                 class "shadow-2"
             else
                 class ""
+
+        selectMsg =
+            if selected then
+                SelectEvent Nothing
+            else
+                SelectEvent <| Just event
     in
-        li [ class "pb3 flex pointer", onClick <| SelectEvent event ]
-            [ div [ class "w-100 br2 pv3 ph3", kindClass, shadowClass ]
+        li [ class "pb3 flex " ]
+            [ div
+                [ class "w-100 br2 pv3 ph3 pointer"
+                , kindClass
+                , shadowClass
+                , opacityClass
+                , onClick selectMsg
+                ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv2" ] [ text title ]
                 , div [ class "lh-copy overflow-hidden transition-smooth", descriptionClass ] [ text description ]
@@ -91,17 +110,21 @@ viewTalk talk event selected =
 
 viewSchedule : Events -> Html Msg
 viewSchedule schedule =
-    ul [ class "list pa0 ma0" ] <|
-        MaybeZipper.mapToList
-            (\event selected ->
-                case event of
-                    Event e ->
-                        viewEvent e
+    let
+        anySelected =
+            MaybeExtra.isJust <| MaybeZipper.get schedule
+    in
+        ul [ class "list pa0 ma0" ] <|
+            MaybeZipper.mapToList
+                (\event selected ->
+                    case event of
+                        Event e ->
+                            viewEvent e
 
-                    Talk t ->
-                        viewTalk t event selected
-            )
-            schedule
+                        Talk t ->
+                            viewTalk t event selected anySelected
+                )
+                schedule
 
 
 view model =
@@ -124,7 +147,7 @@ view model =
 
 type Msg
     = Navigate Location
-    | SelectEvent Event
+    | SelectEvent (Maybe Event)
 
 
 update msg model =
@@ -133,9 +156,16 @@ update msg model =
             ( model, Cmd.none )
 
         SelectEvent event ->
-            ( { model | schedule = MaybeZipper.select event model.schedule }
-            , Cmd.none
-            )
+            case event of
+                Just e ->
+                    ( { model | schedule = MaybeZipper.select e model.schedule }
+                    , Cmd.none
+                    )
+
+                Nothing ->
+                    ( { model | schedule = MaybeZipper.unselect model.schedule }
+                    , Cmd.none
+                    )
 
 
 
