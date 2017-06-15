@@ -43,10 +43,21 @@ toList (MaybeZipper beforeList selected afterList) =
         ++ afterList
 
 
+maybeEqual : a -> Maybe a -> Bool
+maybeEqual a maybeB =
+    case maybeB of
+        Just b ->
+            a == b
+
+        Nothing ->
+            False
+
+
 mapToList : (a -> Bool -> b) -> MaybeZipper a -> List b
 mapToList mapFn ((MaybeZipper beforeList selected afterList) as zipper) =
     toList zipper
-        |> List.map (\i -> mapFn i (Just i == selected))
+        |> List.map
+            (\item -> mapFn item (maybeEqual item selected))
 
 
 
@@ -60,10 +71,10 @@ find findFn zipper =
             toList zipper
 
         bef =
-            takeWhile findFn zipperList
+            takeWhile (findFn >> not) zipperList
 
         rest =
-            dropWhile findFn zipperList
+            dropWhile (findFn >> not) zipperList
 
         sel =
             List.head rest
@@ -72,3 +83,8 @@ find findFn zipper =
             List.tail rest |> Maybe.withDefault []
     in
         MaybeZipper bef sel aft
+
+
+select : a -> MaybeZipper a -> MaybeZipper a
+select item zipper =
+    find ((==) item) zipper
