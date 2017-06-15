@@ -55,14 +55,17 @@ viewTalk talk event selected =
         authorName =
             talk.author.name
 
+        authorAvatar =
+            talk.author.avatarUrl
+
         description =
             talk.description
 
         descriptionClass =
             if selected then
-                class "mh-100 o-100"
+                class "mb3 mh-100 o-100"
             else
-                class "mh-0 o-0"
+                class "mb0 mh-0 o-0"
 
         kindClass =
             class <| kindToClass talk.kind
@@ -77,8 +80,11 @@ viewTalk talk event selected =
             [ div [ class "w-100 br2 pv3 ph3", kindClass, shadowClass ]
                 [ time [] [ text startEnd ]
                 , h4 [ class "f4 mv2" ] [ text title ]
-                , div [ class "overflow-hidden transition-smooth", descriptionClass ] [ text description ]
-                , div [] [ text authorName ]
+                , div [ class "lh-copy overflow-hidden transition-smooth", descriptionClass ] [ text description ]
+                , div [ class "flex items-center" ]
+                    [ img [ class "br-100 bn w-text h-text bg-white mr1", src authorAvatar ] []
+                    , span [] [ text authorName ]
+                    ]
                 ]
             ]
 
