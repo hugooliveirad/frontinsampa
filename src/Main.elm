@@ -58,12 +58,6 @@ viewTalk talk event selected =
         description =
             talk.description
 
-        wrapperClass =
-            if selected then
-                class "scale-1"
-            else
-                class ""
-
         descriptionClass =
             if selected then
                 class "mh-100 o-100"
@@ -75,14 +69,14 @@ viewTalk talk event selected =
 
         shadowClass =
             if selected then
-                class "shadow-4"
+                class "shadow-2"
             else
                 class ""
     in
-        li [ class "pb3 flex pointer grow", wrapperClass, onClick <| SelectEvent event ]
+        li [ class "pb3 flex pointer", onClick <| SelectEvent event ]
             [ div [ class "w-100 br2 pv3 ph3", kindClass, shadowClass ]
                 [ time [] [ text startEnd ]
-                , h4 [ class "f4 mv2 normal" ] [ text title ]
+                , h4 [ class "f4 mv2" ] [ text title ]
                 , div [ class "overflow-hidden transition-smooth", descriptionClass ] [ text description ]
                 , div [] [ text authorName ]
                 ]
