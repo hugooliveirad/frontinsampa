@@ -153,30 +153,37 @@ viewSchedule model =
         now =
             Date.fromTime model.now
     in
-        ul [ class "list pa0 ma0" ] <|
-            MaybeZipper.mapToList
-                (\event selected ->
-                    case event of
-                        Event e ->
-                            let
-                                happening =
-                                    case e.end of
-                                        Nothing ->
-                                            False
+        section [ class "pa3" ]
+            [ ul [ class "list pa0 ma0" ] <|
+                MaybeZipper.mapToList
+                    (\event selected ->
+                        case event of
+                            Event e ->
+                                let
+                                    happening =
+                                        case e.end of
+                                            Nothing ->
+                                                False
 
-                                        Just end ->
-                                            isBetween e.start end now
-                            in
-                                viewEvent e happening
+                                            Just end ->
+                                                isBetween e.start end now
+                                in
+                                    viewEvent e happening
 
-                        Talk t ->
-                            let
-                                happening =
-                                    isBetween t.start t.end now
-                            in
-                                viewTalk t event happening selected anySelected
-                )
-                schedule
+                            Talk t ->
+                                let
+                                    happening =
+                                        isBetween t.start t.end now
+                                in
+                                    viewTalk t event happening selected anySelected
+                    )
+                    schedule
+            ]
+
+
+viewInformation : Model -> Html Msg
+viewInformation model =
+    div [] []
 
 
 view model =
@@ -190,8 +197,8 @@ view model =
                     [ text "Frontinsampa" ]
                 ]
             ]
-        , section [ class "pa3" ]
-            [ viewSchedule model ]
+        , viewInformation model
+        , viewSchedule model
         , footer [] []
         ]
 
