@@ -4,8 +4,7 @@
     Frontinsampa 2017
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <script src="dist/main.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.4/css/tachyons.min.css"/>
+  <link rel="stylesheet" href="css/tachyons.css"/>
   <style>
     .flex-no-shrink { flex-shrink: 0 }
     .mh-0 { max-height: 0px }
@@ -14,6 +13,12 @@
     .w-text { width: 1.3em }
     .h-text { height: 1.3em }
   </style>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+  <script src="dist/main.js"></script>
 </head>
 <body class="helvetica">
   <script>
