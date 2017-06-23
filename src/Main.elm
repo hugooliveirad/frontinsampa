@@ -145,13 +145,16 @@ viewSchedule schedule =
 view model =
     div []
         [ header [ class "pa3 pt4" ]
-            [ h1 [ class "f2 ma0" ] [ text "Frontinsampa" ] ]
-        , section [ class "pa3" ]
-            [ h2 [ class "f2 ma0 mb4" ] [ text "Informações" ] ]
-        , section [ class "pa3" ]
-            [ h2 [ class "f2 ma0 mb4" ] [ text "Agenda" ]
-            , viewSchedule model.schedule
+            [ h1 [ class "ma0" ]
+                [ div [ class "f2" ]
+                    [ text "Programação" ]
+                , div
+                    [ class "f3 mt2" ]
+                    [ text "Frontinsampa" ]
+                ]
             ]
+        , section [ class "pa3" ]
+            [ viewSchedule model.schedule ]
         , footer [] []
         ]
 
