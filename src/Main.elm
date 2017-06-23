@@ -173,6 +173,14 @@ viewSchedule model =
             ]
 
 
+mapUrl =
+    "https://goo.gl/maps/yF3bHmXUBav"
+
+
+codeOfConductUrl =
+    "http://pt-br.confcodeofconduct.com"
+
+
 viewInformation : Model -> Html Msg
 viewInformation model =
     let
@@ -206,7 +214,7 @@ viewInformation model =
                             [ td [ class "db b" ] [ text "Localização" ]
                             , td [ class "db" ]
                                 [ text "Teatro do Hotel Maksoud Plaza - R. São Carlos do Pinhal, 424, São Paulo "
-                                , a [ href "#", target "_blank", class "db black" ] [ text "Ver no mapa" ]
+                                , a [ href mapUrl, target "_blank", class "db black" ] [ text "Ver no mapa" ]
                                 ]
                             ]
                         , tr [ class "db" ]
@@ -214,7 +222,7 @@ viewInformation model =
                             , td [ class "db" ]
                                 [ text "Leia o Código no "
                                 , a
-                                    [ href "#", target "_blank", class "black" ]
+                                    [ href codeOfConductUrl, target "_blank", class "black" ]
                                     [ text "site" ]
                                 ]
                             ]
