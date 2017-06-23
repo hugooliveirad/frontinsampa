@@ -181,6 +181,10 @@ codeOfConductUrl =
     "http://pt-br.confcodeofconduct.com"
 
 
+officialWebsiteUrl =
+    "http://frontinsampa.com.br"
+
+
 viewInformation : Model -> Html Msg
 viewInformation model =
     let
@@ -217,13 +221,22 @@ viewInformation model =
                                 , a [ href mapUrl, target "_blank", class "db black" ] [ text "Ver no mapa" ]
                                 ]
                             ]
-                        , tr [ class "db" ]
+                        , tr [ class "db mb2" ]
                             [ td [ class "db b" ] [ text "Código de Conduta" ]
                             , td [ class "db" ]
                                 [ text "Leia o Código no "
                                 , a
                                     [ href codeOfConductUrl, target "_blank", class "black" ]
                                     [ text "site" ]
+                                ]
+                            ]
+                        , tr [ class "db" ]
+                            [ td [ class "db b" ] [ text "Site oficial" ]
+                            , td [ class "db" ]
+                                [ text "Acesse o "
+                                , a
+                                    [ href officialWebsiteUrl, target "_blank", class "black" ]
+                                    [ text "site oficial" ]
                                 ]
                             ]
                         ]
