@@ -183,7 +183,13 @@ viewSchedule model =
 
 viewInformation : Model -> Html Msg
 viewInformation model =
-    div [] []
+    section [ class "pa3 pb0" ]
+        [ a
+            [ class "db pointer link pa3 br2 bg-yellow black" ]
+            [ h4 [ class "f4 ma0 mb1 normal" ] [ text "Informações" ]
+            , div [ class "f6" ] [ text "Wi-Fi, Localização e mais…" ]
+            ]
+        ]
 
 
 view model =
