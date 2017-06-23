@@ -20,12 +20,14 @@ import Task
 type alias Model =
     { schedule : Events
     , now : Time
+    , openedInformation : Bool
     }
 
 
 initModel =
     { schedule = schedule
     , now = 0
+    , openedInformation = False
     }
 
 
@@ -177,19 +179,34 @@ viewSchedule model =
                                 in
                                     viewTalk t event happening selected anySelected
                     )
-                    schedule
+                    model.schedule
             ]
 
 
 viewInformation : Model -> Html Msg
 viewInformation model =
-    section [ class "pa3 pb0" ]
-        [ header []
+    let
+        ( descriptionClass, tableClass ) =
+            if model.openedInformation then
+                ( class "dn", class "mh-100 o-100" )
+            else
+                ( class "", class "mh-0 o-0" )
+    in
+        section [ class "pa3 pb0" ]
             [ div
-                [ class "pointer pa3 br2 bg-yellow black" ]
+                [ class "pointer pa3 br2 bg-yellow black"
+                , onClick OpenInformation
+                ]
                 [ h4 [ class "f4 ma0 mb1" ] [ text "Informações" ]
-                , div [ class "f6" ] [ text "Wi-Fi, Localização e mais…" ]
-                , table [ class "collapse db mt2" ]
+                , div
+                    [ class "f6"
+                    , descriptionClass
+                    ]
+                    [ text "Wi-Fi, Localização e mais…" ]
+                , table
+                    [ class "collapse db overflow-hidden transition-smooth"
+                    , tableClass
+                    ]
                     [ tbody []
                         [ tr [ class "db mb2" ]
                             [ td [ class "db b" ] [ text "Wi-Fi" ]
@@ -199,20 +216,22 @@ viewInformation model =
                             [ td [ class "db b" ] [ text "Localização" ]
                             , td [ class "db" ]
                                 [ text "Teatro do Hotel Maksoud Plaza - R. São Carlos do Pinhal, 424, São Paulo "
-                                , a [ href "#" ] [ text "Ver no mapa" ]
+                                , a [ href "#", target "_blank", class "db black" ] [ text "Ver no mapa" ]
                                 ]
                             ]
                         , tr [ class "db" ]
                             [ td [ class "db b" ] [ text "Código de Conduta" ]
                             , td [ class "db" ]
-                                [ a [ href "#" ] [ text "Ver no site" ]
+                                [ text "Leia o Código no "
+                                , a
+                                    [ href "#", target "_blank", class "black" ]
+                                    [ text "site" ]
                                 ]
                             ]
                         ]
                     ]
                 ]
             ]
-        ]
 
 
 view model =
@@ -240,6 +259,7 @@ type Msg
     = Navigate Location
     | SelectEvent (Maybe Event)
     | UpdateTime Time
+    | OpenInformation
 
 
 update msg model =
@@ -261,6 +281,9 @@ update msg model =
 
         UpdateTime time ->
             ( { model | now = time }, Cmd.none )
+
+        OpenInformation ->
+            ( { model | openedInformation = True }, Cmd.none )
 
 
 
