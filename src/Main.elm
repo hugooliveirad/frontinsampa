@@ -184,10 +184,33 @@ viewSchedule model =
 viewInformation : Model -> Html Msg
 viewInformation model =
     section [ class "pa3 pb0" ]
-        [ a
-            [ class "db pointer link pa3 br2 bg-yellow black" ]
-            [ h4 [ class "f4 ma0 mb1 normal" ] [ text "Informações" ]
-            , div [ class "f6" ] [ text "Wi-Fi, Localização e mais…" ]
+        [ header []
+            [ div
+                [ class "pointer pa3 br2 bg-yellow black" ]
+                [ h4 [ class "f4 ma0 mb1" ] [ text "Informações" ]
+                , div [ class "f6" ] [ text "Wi-Fi, Localização e mais…" ]
+                , table [ class "collapse db mt2" ]
+                    [ tbody []
+                        [ tr [ class "db mb2" ]
+                            [ td [ class "db b" ] [ text "Wi-Fi" ]
+                            , td [ class "db" ] [ text "Frontinsampa" ]
+                            ]
+                        , tr [ class "db mb2" ]
+                            [ td [ class "db b" ] [ text "Localização" ]
+                            , td [ class "db" ]
+                                [ text "Teatro do Hotel Maksoud Plaza - R. São Carlos do Pinhal, 424, São Paulo "
+                                , a [ href "#" ] [ text "Ver no mapa" ]
+                                ]
+                            ]
+                        , tr [ class "db" ]
+                            [ td [ class "db b" ] [ text "Código de Conduta" ]
+                            , td [ class "db" ]
+                                [ a [ href "#" ] [ text "Ver no site" ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ]
 
