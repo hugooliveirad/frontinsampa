@@ -73,7 +73,7 @@ viewEvent event happening =
             ]
 
 
-viewTalk talk event happening selected anySelected =
+viewTalk talk event happening selected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
@@ -99,12 +99,6 @@ viewTalk talk event happening selected anySelected =
         kindClass =
             class <| kindToClass talk.kind
 
-        opacityClass =
-            if anySelected && not selected then
-                class "o-60"
-            else
-                class "o-100"
-
         shadowClass =
             if selected then
                 class "shadow-2"
@@ -122,7 +116,6 @@ viewTalk talk event happening selected anySelected =
                 [ class "w-100 br2 pv3 ph3 pointer"
                 , kindClass
                 , shadowClass
-                , opacityClass
                 , onClick selectMsg
                 ]
                 [ time []
@@ -149,9 +142,6 @@ viewTalk talk event happening selected anySelected =
 viewSchedule : Model -> Html Msg
 viewSchedule model =
     let
-        anySelected =
-            MaybeExtra.isJust <| MaybeZipper.get model.schedule
-
         now =
             Date.fromTime model.now
     in
@@ -177,7 +167,7 @@ viewSchedule model =
                                     happening =
                                         isBetween t.start t.end now
                                 in
-                                    viewTalk t event happening selected anySelected
+                                    viewTalk t event happening selected
                     )
                     model.schedule
             ]
