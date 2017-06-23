@@ -4,7 +4,7 @@
   "author": "Hugo Bessa <eu@hugobessa.com.br>",
   "license": "AGPL v3.0",
   "scripts": {
-    "start": "elm-live src/Main.elm --output dist/main.js --open --host=0.0.0.0"
+    "start": "elm-live src/Main.elm --output dist/main.js --open --host=0.0.0.0 --debug"
   },
   "dependencies": {
     "elm": "^0.18.0",
