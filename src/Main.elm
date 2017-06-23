@@ -245,6 +245,13 @@ viewInformation model =
             ]
 
 
+viewFooter =
+    footer [ class "bt b--light-gray pa3 pb4 tc" ]
+        [ span [] [ text "Desenvolvido por " ]
+        , a [ href "http://hugobessa.com.br", target "_blank" ] [ text "Hugo Bessa" ]
+        ]
+
+
 view model =
     div []
         [ header [ class "pa3 pt4" ]
@@ -258,7 +265,7 @@ view model =
             ]
         , viewInformation model
         , viewSchedule model
-        , footer [] []
+        , viewFooter
         ]
 
 
