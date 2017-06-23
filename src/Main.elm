@@ -3,30 +3,52 @@ module Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Date
 import Date.Extra exposing (isBetween)
 import DateHelpers exposing (..)
+import Time exposing (Time)
 import Events exposing (..)
 import Navigation as Navigation exposing (Location)
 import MaybeZipper
 import Maybe.Extra as MaybeExtra
+import Task
 
 
 -- MODEL
 
 
 type alias Model =
-    { schedule : Events }
+    { schedule : Events
+    , now : Time
+    }
 
 
 initModel =
-    { schedule = schedule }
+    { schedule = schedule
+    , now = 0
+    }
 
 
 
 -- VIEW
 
 
-viewEvent event =
+viewHappening happening =
+    let
+        happeningClass =
+            if happening then
+                class ""
+            else
+                class "dn"
+    in
+        span
+            [ class "br2 pa1 bg-red white ml2"
+            , happeningClass
+            ]
+            [ text "Agora" ]
+
+
+viewEvent event happening =
     let
         startEnd =
             formatEventTime event.start event.end
@@ -39,23 +61,20 @@ viewEvent event =
     in
         li [ class "pb3 flex" ]
             [ div [ class "w-100 br2 bg-light-gray mid-gray pv3 ph3" ]
-                [ time [] [ text startEnd ]
+                [ div []
+                    [ time [] [ text startEnd ]
+                    , viewHappening happening
+                    ]
                 , h4 [ class "f4 mv1 normal" ] [ text title ]
                 , div [] [ text comment ]
                 ]
             ]
 
 
-viewTalk talk event now selected anySelected =
+viewTalk talk event happening selected anySelected =
     let
         startEnd =
             formatTalkTime talk.start talk.end
-
-        nowClass =
-            if now then
-                class ""
-            else
-                class "dn"
 
         title =
             talk.title
@@ -104,40 +123,58 @@ viewTalk talk event now selected anySelected =
                 , opacityClass
                 , onClick selectMsg
                 ]
-                [ time [] [ text startEnd ]
-                , span [ class "br2 pa1 bg-red white ml2", nowClass ] [ text "Agora" ]
+                [ time []
+                    [ text startEnd ]
+                , viewHappening happening
                 , h4 [ class "f4 mv2" ] [ text title ]
-                , div [ class "lh-copy overflow-hidden transition-smooth", descriptionClass ] [ text description ]
+                , div
+                    [ class "lh-copy overflow-hidden transition-smooth"
+                    , descriptionClass
+                    ]
+                    [ text description ]
                 , div [ class "flex items-center" ]
-                    [ img [ class "br-100 bn w-text h-text bg-white mr1", src authorAvatar ] []
+                    [ img
+                        [ class "br-100 bn w-text h-text bg-white mr1"
+                        , src authorAvatar
+                        ]
+                        []
                     , span [] [ text authorName ]
                     ]
                 ]
             ]
 
 
-viewSchedule : Events -> Html Msg
-viewSchedule schedule =
+viewSchedule : Model -> Html Msg
+viewSchedule model =
     let
         anySelected =
-            MaybeExtra.isJust <| MaybeZipper.get schedule
+            MaybeExtra.isJust <| MaybeZipper.get model.schedule
 
-        currentTime =
-            eventTime 10 10
+        now =
+            Date.fromTime model.now
     in
         ul [ class "list pa0 ma0" ] <|
             MaybeZipper.mapToList
                 (\event selected ->
                     case event of
                         Event e ->
-                            viewEvent e
+                            let
+                                happening =
+                                    case e.end of
+                                        Nothing ->
+                                            False
+
+                                        Just end ->
+                                            isBetween e.start end now
+                            in
+                                viewEvent e happening
 
                         Talk t ->
                             let
-                                now =
-                                    isBetween t.start t.end currentTime
+                                happening =
+                                    isBetween t.start t.end now
                             in
-                                viewTalk t event now selected anySelected
+                                viewTalk t event happening selected anySelected
                 )
                 schedule
 
@@ -154,7 +191,7 @@ view model =
                 ]
             ]
         , section [ class "pa3" ]
-            [ viewSchedule model.schedule ]
+            [ viewSchedule model ]
         , footer [] []
         ]
 
@@ -166,6 +203,7 @@ view model =
 type Msg
     = Navigate Location
     | SelectEvent (Maybe Event)
+    | UpdateTime Time
 
 
 update msg model =
@@ -185,13 +223,16 @@ update msg model =
                     , Cmd.none
                     )
 
+        UpdateTime time ->
+            ( { model | now = time }, Cmd.none )
+
 
 
 -- SUBSCRIPTIONS
 
 
 subscriptions model =
-    Sub.none
+    Time.every (20 * Time.second) UpdateTime
 
 
 
@@ -199,7 +240,7 @@ subscriptions model =
 
 
 init location =
-    ( initModel, Cmd.none )
+    ( initModel, Task.perform UpdateTime Time.now )
 
 
 main =
