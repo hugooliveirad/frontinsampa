@@ -18,10 +18,11 @@ main() {
 create_clear_dist() {
     rm -rf dist-prod
     mkdir -p dist-prod/css
+    mkdir -p dist-prod/dist
 }
 
 compile_elm() {
-  node_modules/.bin/elm-make src/Main.elm --yes --output dist-prod/main.js
+  node_modules/.bin/elm-make src/Main.elm --yes --output dist-prod/dist/main.js
 }
 
 copy_index() {
@@ -29,7 +30,7 @@ copy_index() {
 }
 
 copy_styles() {
-    cp css/tachyons.css dist-prod/css/tachyon.css
+    cp css/tachyons.css dist-prod/css/tachyons.css
 }
 
 main || exit 1
