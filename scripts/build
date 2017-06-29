@@ -2,11 +2,11 @@
 
 # Just a small script to build the Elm app, and move files to the dist folder.
 
-set -u
+set -eu
 
 # Commands will run relatively to root of the project
-parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-cd "../$parent_path"
+app_root="$(dirname "$(dirname "$(readlink "$0")")")"
+cd "$app_root"
 
 main() {
   create_clear_dist
@@ -32,4 +32,4 @@ copy_styles() {
     cp css/tachyons.css dist-prod/css/tachyon.css
 }
 
-main
+main || exit 1
