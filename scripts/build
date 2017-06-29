@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Just a small script to build the Elm app, and move files to the dist folder.
+
+set -u
+
+# Commands will run relatively to root of the project
+parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+cd "../$parent_path"
+
+main() {
+  create_clear_dist
+  compile_elm
+  copy_index
+  copy_styles
+}
+
+create_clear_dist() {
+    rm -rf dist-prod
+    mkdir -p dist-prod/css
+}
+
+compile_elm() {
+  node_modules/.bin/elm-make src/Main.elm --yes --output dist-prod/main.js
+}
+
+copy_index() {
+    cp index.html dist-prod/index.html
+}
+
+copy_styles() {
+    cp css/tachyons.css dist-prod/css/tachyon.css
+}
+
+main
