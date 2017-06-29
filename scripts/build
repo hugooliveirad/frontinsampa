@@ -13,6 +13,7 @@ main() {
   compile_elm
   copy_index
   copy_styles
+  copy_images
 }
 
 create_clear_dist() {
@@ -31,6 +32,10 @@ copy_index() {
 
 copy_styles() {
     cp css/tachyons.css dist-prod/css/tachyons.css
+}
+
+copy_images() {
+    cp -r images dist-prod/images
 }
 
 main || exit 1
