@@ -261,10 +261,10 @@ viewFooter =
     footer [ class "bt b--light-gray pa3 pb4 tc" ]
         [ div []
             [ span [] [ text "Desenvolvido por " ]
-            , a [ class "link blue u", href "http://hugobessa.com.br", target "_blank" ] [ text "Hugo Bessa" ]
+            , a [ class "link blue", href "http://hugobessa.com.br", target "_blank" ] [ text "Hugo Bessa" ]
             ]
         , div [ class "mt4" ]
-            [ a [ class "link blue u", href "https://github.com/hugobessaa/frontinsampa", target "_blank" ] [ text "GitHub" ]
+            [ a [ class "link blue", href "https://github.com/hugobessaa/frontinsampa", target "_blank" ] [ text "GitHub" ]
             ]
         ]
 
