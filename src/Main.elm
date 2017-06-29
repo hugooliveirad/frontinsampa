@@ -197,7 +197,7 @@ viewInformation model =
         section [ class "pa3 pb0" ]
             [ div
                 [ class "pointer pa3 br2 bg-yellow black"
-                , onClick OpenInformation
+                , onClick ToggleInformation
                 ]
                 [ h4 [ class "f4 ma0 mb1" ] [ text "Informações" ]
                 , div
@@ -277,7 +277,7 @@ type Msg
     = Navigate Location
     | SelectEvent (Maybe Event)
     | UpdateTime Time
-    | OpenInformation
+    | ToggleInformation
 
 
 update msg model =
@@ -300,8 +300,8 @@ update msg model =
         UpdateTime time ->
             ( { model | now = time }, Cmd.none )
 
-        OpenInformation ->
-            ( { model | openedInformation = True }, Cmd.none )
+        ToggleInformation ->
+            ( { model | openedInformation = not model.openedInformation }, Cmd.none )
 
 
 
