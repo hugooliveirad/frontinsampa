@@ -265,7 +265,7 @@ viewFooter =
 
 
 view model =
-    div []
+    div [ class "center mw6" ]
         [ viewHeader
         , viewInformation model
         , viewSchedule model
