@@ -11,7 +11,7 @@ type alias Author =
 fabioVedovelli : Author
 fabioVedovelli =
     { name = "Fábio Vedovelli"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/fabio-vedovelli-frontinsampa.jpg"
+    , avatarUrl = "images/fabio-vedovelli.jpg"
     , twitterHandle = "vedovelli"
     }
 
@@ -19,7 +19,7 @@ fabioVedovelli =
 biancaBrancaleone : Author
 biancaBrancaleone =
     { name = "Bianca Brancaleone"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/bianca-brancaleone-frontinsampa.jpg"
+    , avatarUrl = "/images/bianca-brancaleone.jpg"
     , twitterHandle = "biab"
     }
 
@@ -27,7 +27,7 @@ biancaBrancaleone =
 raphaelFabeni : Author
 raphaelFabeni =
     { name = "Raphael Fabeni"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/raphael-fabeni-frontinsampa.jpg"
+    , avatarUrl = "/images/raphael-fabeni.jpg"
     , twitterHandle = "raphaelfabeni"
     }
 
@@ -35,7 +35,7 @@ raphaelFabeni =
 patriciaSilva : Author
 patriciaSilva =
     { name = "Patrícia Silva"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/patricia-silva-frontinsampa.jpg"
+    , avatarUrl = "/images/patricia-silva.jpg"
     , twitterHandle = "Paty_Go"
     }
 
@@ -43,7 +43,7 @@ patriciaSilva =
 brunoGenaro : Author
 brunoGenaro =
     { name = "Bruno Genaro"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/bruno-genaro-frontinsampa.jpg"
+    , avatarUrl = "/images/bruno-genaro.jpg"
     , twitterHandle = "bfgenaro"
     }
 
@@ -51,7 +51,7 @@ brunoGenaro =
 hugoBessa : Author
 hugoBessa =
     { name = "Hugo Bessa"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/hugo-bessa-frontinsampa.jpg"
+    , avatarUrl = "/images/hugo-bessa.jpg"
     , twitterHandle = "hugoBessaa"
     }
 
@@ -59,7 +59,7 @@ hugoBessa =
 reinaldoFerraz : Author
 reinaldoFerraz =
     { name = "Reinaldo Ferraz"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/reinaldo-ferraz-frontinsampa.jpg"
+    , avatarUrl = "/images/reinaldo-ferraz.jpg"
     , twitterHandle = "reinaldoferraz"
     }
 
@@ -67,7 +67,7 @@ reinaldoFerraz =
 zehFernandes : Author
 zehFernandes =
     { name = "Zeh Fernandes"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/zeh-fernandes-frontinsampa.jpg"
+    , avatarUrl = "/images/zeh-fernandes.jpg"
     , twitterHandle = "zehf"
     }
 
@@ -75,7 +75,7 @@ zehFernandes =
 jeanCarlo : Author
 jeanCarlo =
     { name = "Jean Carlo Emer"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/jean-carlo-emer-frontinsampa.jpg"
+    , avatarUrl = "/images/jean-carlo-emer.jpg"
     , twitterHandle = "jcemer"
     }
 
@@ -83,7 +83,7 @@ jeanCarlo =
 zenoRocha : Author
 zenoRocha =
     { name = "Zeno Rocha"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/zeno-rocha-frontinsampa.jpg"
+    , avatarUrl = "/images/zeno-rocha.jpg"
     , twitterHandle = "zenorocha"
     }
 
@@ -91,6 +91,6 @@ zenoRocha =
 matheusMarsiglio : Author
 matheusMarsiglio =
     { name = "Matheus Marsiglio"
-    , avatarUrl = "http://www.frontinsampa.com.br/assets/images/matheus-marsiglio-frontinsampa.jpg"
+    , avatarUrl = "/images/matheus-marsiglio.jpg"
     , twitterHandle = "mtmr0x"
     }
