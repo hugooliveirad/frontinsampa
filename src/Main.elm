@@ -245,6 +245,18 @@ viewInformation model =
             ]
 
 
+viewHeader =
+    header [ class "pa3 pt4" ]
+        [ h1 [ class "ma0" ]
+            [ div [ class "f2" ]
+                [ text "Programação" ]
+            , div
+                [ class "f3 mt2" ]
+                [ text "Frontinsampa" ]
+            ]
+        ]
+
+
 viewFooter =
     footer [ class "bt b--light-gray pa3 pb4 tc" ]
         [ span [] [ text "Desenvolvido por " ]
@@ -254,15 +266,7 @@ viewFooter =
 
 view model =
     div []
-        [ header [ class "pa3 pt4" ]
-            [ h1 [ class "ma0" ]
-                [ div [ class "f2" ]
-                    [ text "Programação" ]
-                , div
-                    [ class "f3 mt2" ]
-                    [ text "Frontinsampa" ]
-                ]
-            ]
+        [ viewHeader
         , viewInformation model
         , viewSchedule model
         , viewFooter
