@@ -310,7 +310,7 @@ update msg model =
             ( { model | now = time }, Cmd.none )
 
         ToggleInformation ->
-            ( { model | openedInformation = True }, Cmd.none )
+            ( { model | openedInformation = not model.openedInformation }, Cmd.none )
 
 
 
