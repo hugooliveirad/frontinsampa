@@ -212,7 +212,7 @@ viewInformation model =
                     [ tbody []
                         [ tr [ class "db mb2" ]
                             [ td [ class "db b" ] [ text "Wi-Fi" ]
-                            , td [ class "db" ] [ text "Frontinsampa" ]
+                            , td [ class "db" ] [ text "frontinsampa (senha: Front2017)" ]
                             ]
                         , tr [ class "db mb2" ]
                             [ td [ class "db b" ] [ text "Localização" ]
